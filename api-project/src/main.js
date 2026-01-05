@@ -1,6 +1,6 @@
-async function getData(dog) {
+async function getData(animals) {
   try {
-    const response = await fetch(`https://dog.ceo/api/breeds/image/random`);
+    const response = await fetch(`https://api.artic.edu/api/v1/artworks`);
     if (response.status != 200) {
       throw new Error(response);
     } else {
