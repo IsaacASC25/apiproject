@@ -1,4 +1,7 @@
-async function getData(animals) {
+import './style.css'
+
+let userinput = myElement.addEventListener("click", (e) => {});
+async function getData(userinput) {
   try {
     const response = await fetch(`https://api.artic.edu/api/v1/artworks`);
     if (response.status != 200) {
