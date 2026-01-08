@@ -1,9 +1,7 @@
 import './style.css'
-
-let userinput = myElement.addEventListener("click", (e) => {});
 async function getData(userinput) {
   try {
-    const response = await fetch(`https://api.artic.edu/api/v1/artworks`);
+    const response = await fetch(`https://ghibliapi.vercel.app`);
     if (response.status != 200) {
       throw new Error(response);
     } else {
@@ -16,3 +14,4 @@ async function getData(userinput) {
   }
 }
 getData();
+//Idea: Pokemon cards pulled by using the set they are in and the rarity that they are. So ex. all the EX's or GX's in paldean fates or smth. 
