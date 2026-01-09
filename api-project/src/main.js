@@ -6,14 +6,15 @@ async function getPokemonCards() {
 
   try {
     //the idea if that it pulls pokemon cards pulled by using the set they are in and the rarity that they are. So all the ex's or gx's in paldean fates or smth.
-    const setValue = document.getElementById("setInput").value.trim(); // in case user types extra
-    const rarityValue = document.getElementById("rarityInput").value.trim();
-    const url = `https://api.pokemontcg.io/v2/cards?q=set.name:"${setValue}" rarity:"${rarityValue}"`;
+    const set = document.getElementById("set").value.trim(); // in case user types extra
+    const name = document.getElementById("name").value.trim();
+    const url = `https://api.pokemontcg.io/v2/cards`;
+    const url2 = `https://api.pokemontcg.io/v2/rarities`;
     const response = await fetch(url, {
       headers: {
         "X-Api-Key": apiKey,
       },
-    });
+    })
     
     if (!response.ok) {
       throw new Error(`Error Status: ${response.status}`);
@@ -30,7 +31,6 @@ async function getPokemonCards() {
         </div>
       `
         )
-        .join("");
     }
   } catch (error) {
     console.log(error);

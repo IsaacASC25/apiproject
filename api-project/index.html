@@ -15,12 +15,12 @@
       <h1 class="text-6xl font-bold text-center p-4 mb-12" style="font-family: 'Pokemon Solid', sans-serif;">Pokemon Card Finder</h1>
 
       <section class="bg-white rounded-lg shadow p-6 mb-8">
-        <p class="text-sm text-gray-600 mb-4">Search Pokemon cards by set and rarity.</p>
+        <p class="text-sm text-gray-600 mb-4">Search Pokemon cards by set and name.</p>
 
         <div class="grid gap-4 md:grid-cols-3">
           <div class="relative">
             <input
-              id="setInput"
+              id="set"
               type="text"
               placeholder="Set"
               class="border rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -33,13 +33,13 @@
 
           <div class="relative">
             <input
-              id="rarityInput"
+              id="name"
               type="text"
-              placeholder="Rarity"
+              placeholder="Name"
               class="border rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <ul
-              id="raritySuggestions"
+              id="nameSuggestions"
               class="absolute left-0 right-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-48 overflow-y-auto hidden z-50"
             ></ul>
           </div>
