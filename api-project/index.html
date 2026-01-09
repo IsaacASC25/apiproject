@@ -3,53 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Api-Project</title>
-    <link href="/src/style.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap"
-      rel="stylesheet"
-    />
+    <title>Pokemon Card Finder</title>
+    <link href="/src/style.css" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
   </head>
-  <body>
-    <h1 class="flex justify-center text-center text-8xl font Georgia, serif;">
-      TCG by TCG Set
-    </h1>
-    <input
-      type="text"
-      placeholder="Text Here:"
-      class="border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none rounded px-3 py-2"
-    />
-    <div role="alert" class="erralert erralert-warning">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6 shrink-0 stroke-current"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-        />
-      </svg>
-      <span>Warning: Invalid email address!</span>
-    </div>
-    <h2 id="api-response"></h2>
-    <div
-      class="flex justify-center text-center card bg-base-100 card-xs shadow-sm"
-    >
-      <div class="card-body">
-        <h2 class="card-title">Xd</h2>
-        <p>A</p>
-        <div class="justify-end card-actions">
-          <button class="btn btn-primary">Data</button>
+  <style>
+  @import url('https://fonts.cdnfonts.com/css/pokemon-solid');
+  </style>
+  <body class="min-h-screen bg-gray-100 text-gray-900">
+    <main class="max-w-6xl mx-auto p-6">
+      <h1 class="text-6xl font-bold text-center p-4 mb-12" style="font-family: 'Pokemon Solid', sans-serif;">Pokemon Card Finder</h1>
+
+      <section class="bg-white rounded-lg shadow p-6 mb-8">
+        <p class="text-sm text-gray-600 mb-4">Search Pokemon cards by set and rarity.</p>
+
+        <div class="grid gap-4 md:grid-cols-3">
+          <div class="relative">
+            <input
+              id="setInput"
+              type="text"
+              placeholder="Set"
+              class="border rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <ul
+              id="setSuggestions"
+              class="absolute left-0 right-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-48 overflow-y-auto hidden z-50"
+            ></ul>
+          </div>
+
+          <div class="relative">
+            <input
+              id="rarityInput"
+              type="text"
+              placeholder="Rarity"
+              class="border rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <ul
+              id="raritySuggestions"
+              class="absolute left-0 right-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-48 overflow-y-auto hidden z-50"
+            ></ul>
+          </div>
+
+          <button
+            id="searchBtn"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md px-6 py-2 transition"
+          >
+            Search
+          </button>
         </div>
-      </div>
-    </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Results</h2>
+        <div
+          id="api-display"
+          class="grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4"
+        >
+          <p class="col-span-full text-center text-gray-500">Loading cards...</p>
+        </div>
+      </section>
+    </main>
   </body>
-  <sript src="api.js"></sript
-  >`
 </html>

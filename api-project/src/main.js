@@ -1,17 +1,40 @@
-import './style.css'
-async function getData(userinput) {
+import "./style.css";
+//My api key is in a .env folder that I did .gitignore too
+const apiKey = import.meta.env.VITE_API_KEY;
+
+async function getPokemonCards() {
+
   try {
-    const response = await fetch(`https://ghibliapi.vercel.app`);
-    if (response.status != 200) {
-      throw new Error(response);
+    //the idea if that it pulls pokemon cards pulled by using the set they are in and the rarity that they are. So all the ex's or gx's in paldean fates or smth.
+    const setValue = document.getElementById("setInput").value.trim(); // in case user types extra
+    const rarityValue = document.getElementById("rarityInput").value.trim();
+    const url = `https://api.pokemontcg.io/v2/cards?q=set.name:"${setValue}" rarity:"${rarityValue}"`;
+    const response = await fetch(url, {
+      headers: {
+        "X-Api-Key": apiKey,
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Error Status: ${response.status}`);
     } else {
       const data = await response.json();
       console.log(data);
-      document.getElementById("api.response").textContent = data.image;
+      const displayArea = document.getElementById("api-display");
+      displayArea.innerHTML = data.data
+        .map(
+          (card) => `
+        <div class="card-container">
+          <h3>${card.name}</h3>
+          <img src="${card.images.small}" alt="${card.name}" />
+        </div>
+      `
+        )
+        .join("");
     }
   } catch (error) {
     console.log(error);
+    document.getElementById("api-display").textContent =
+      "Failed to load cards.";
   }
 }
-getData();
-//Idea: Pokemon cards pulled by using the set they are in and the rarity that they are. So ex. all the EX's or GX's in paldean fates or smth. 
