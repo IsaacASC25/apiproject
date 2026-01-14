@@ -8,9 +8,7 @@ console.log("API key value:", apiKey);
 async function testAPI() {
   try {
     const response = await fetch("https://api.pokemontcg.io/v2/cards?pageSize=1", {
-      headers: {
-        "X-Api-Key": apiKey
-      }
+      headers: { "X-Api-Key": apiKey },
     });
     console.log("Test response status:", response.status);
     const data = await response.json();
@@ -22,17 +20,30 @@ async function testAPI() {
 
 testAPI();
 
+function createCardHTML(card) {
+  return `
+    <div class="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-5 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border-2 border-gray-200">
+      <div class="mb-4 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg p-3">
+        <img src="${card.images.small}" alt="${card.name}" loading="lazy" class="w-full rounded-md shadow-md"/>
+      </div>
+      <h3 class="font-bold text-xl mb-2 text-gray-900 font-['Poppins'] leading-tight">${card.name}</h3>
+      <p class="text-sm text-gray-600 mb-1 font-['Poppins'] font-medium">${card.set.name}</p>
+      <p class="text-sm font-bold text-blue-600 font-['Poppins'] bg-blue-50 inline-block px-3 py-1 rounded-full">${card.rarity || card.subtypes?.join(", ") || "N/A"}</p>
+    </div>
+  `;
+}
+
 //loading cards on page load, still takes a while, api is very slow
 async function loadRandomCards() {
   try {
     const displayArea = document.getElementById("api-display");
     displayArea.textContent = "Loading cards...";
 
-    const response = await fetch("https://api.pokemontcg.io/v2/cards?pageSize=12");
+    const response = await fetch("https://api.pokemontcg.io/v2/cards?pageSize=12", {
+      headers: { "X-Api-Key": apiKey },
+    });
 
-    if (!response.ok) {
-      throw new Error(`Error Status: ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Error Status: ${response.status}`);
 
     const data = await response.json();
 
@@ -41,21 +52,10 @@ async function loadRandomCards() {
       return;
     }
 
-    displayArea.innerHTML = data.data
-      .map(
-        (card) => `
-          <div class="card">
-            <img src="${card.images.small}" alt="${card.name}">
-            <h3>${card.name}</h3>
-            <p>Set: ${card.set.name}</p>
-            <p>Rarity: ${card.rarity || card.subtypes?.join(", ") || "N/A"}</p>
-          </div>
-        `
-      )
-      .join("");
+    displayArea.innerHTML = data.data.map(createCardHTML).join("");
   } catch (error) {
     console.log(error);
-    document.getElementById("api-display").textContent = "Failed to load cards.";
+    displayArea.textContent = "Failed to load cards.";
   }
 }
 
@@ -89,14 +89,10 @@ async function getPokemonCards() {
     console.log("Full URL:", url);
 
     const response = await fetch(url, {
-      headers: {
-        "X-Api-Key": apiKey,
-      },
+      headers: { "X-Api-Key": apiKey },
     });
 
-    if (!response.ok) {
-      throw new Error(`Error Status: ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Error Status: ${response.status}`);
 
     const data = await response.json();
     console.log("Response data:", data);
@@ -107,19 +103,7 @@ async function getPokemonCards() {
       return;
     }
 
-    displayArea.innerHTML = data.data
-      //For styling because html cannot take from the api
-      .map(
-        (card) => `
-          <div class="card">
-            <img src="${card.images.small}" alt="${card.name}">
-            <h3>${card.name}</h3>
-            <p>Set: ${card.set.name}</p>
-            <p>Rarity: ${card.rarity || card.subtypes?.join(", ") || "N/A"}</p>
-          </div>
-        `
-      )
-      .join("");
+    displayArea.innerHTML = data.data.map(createCardHTML).join("");
   } catch (error) {
     console.log(error);
     document.getElementById("api-display").textContent = "Failed to load cards.";
@@ -128,7 +112,7 @@ async function getPokemonCards() {
 
 loadRandomCards();
 
-document.getElementById("searchBtn").addEventListener("click", getPokemonCards);
+document.getElementById("searchBtn")?.addEventListener("click", getPokemonCards);
 document.getElementById("setInput")?.addEventListener("keypress", (e) => {
   if (e.key === "Enter") getPokemonCards();
 });
