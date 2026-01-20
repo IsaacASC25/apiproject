@@ -6,16 +6,17 @@
     <title>Pokemon Card Finder</title>
     <link href="/src/style.css" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   </head>
   <style>
   @import url('https://fonts.cdnfonts.com/css/pokemon-solid');
   </style>
-  <body class="min-h-screen bg-gray-100 text-gray-900">
-    <main class="max-w-6xl mx-auto p-6">
+  <body class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+    <main class="max-w-7xl mx-auto p-6">
       <h1 class="text-6xl font-bold text-center p-4 mb-12" style="font-family: 'Pokemon Solid', sans-serif;">Pokemon Card Finder</h1>
 
-      <section class="bg-white rounded-lg shadow p-6 mb-8">
-        <p class="text-sm text-gray-600 mb-4">Search Pokemon cards by set and name.</p>
+      <section class="bg-white rounded-xl shadow-lg p-6 mb-8">
+        <p class="text-sm text-gray-600 mb-4 font-['Poppins']">Search Pokemon cards by set and rarity.</p>
 
         <div class="grid gap-4 md:grid-cols-3">
           <div class="relative">
@@ -23,7 +24,7 @@
               id="set"
               type="text"
               placeholder="Set"
-              class="border rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="border border-gray-300 rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-['Poppins']"
             />
             <ul
               id="setSuggestions"
@@ -37,6 +38,8 @@
               type="text"
               placeholder="Name"
               class="border rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Rarity"
+              class="border border-gray-300 rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-['Poppins']"
             />
             <ul
               id="nameSuggestions"
@@ -46,7 +49,7 @@
 
           <button
             id="searchBtn"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md px-6 py-2 transition"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg px-6 py-3 transition-colors shadow-md hover:shadow-lg font-['Poppins']"
           >
             Search
           </button>
@@ -54,14 +57,15 @@
       </section>
 
       <section>
-        <h2 class="text-xl font-semibold mb-4">Results</h2>
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 font-['Poppins']">Results</h2>
         <div
           id="api-display"
-          class="grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4"
+          class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
         >
-          <p class="col-span-full text-center text-gray-500">Loading cards...</p>
+          <p class="col-span-full text-center text-gray-500 font-['Poppins']">No cards to display!</p>
         </div>
       </section>
     </main>
+      <script type="module" src="/src/main.js"></script>
   </body>
 </html>
